@@ -1,0 +1,58 @@
+
+.form {
+    display: flex;
+    flex-direction: column;
+    /* width: ; */
+    align-items: start;
+}
+.content {
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(108, 108, 108, 0.45) ;
+    gap: 10px;
+    padding: 30px; 
+
+}
+
+.content input,.content select {
+    padding: 10px;
+    border-radius: 15px;
+}
+.error-input {
+    color: red;
+    font-size: 12px;
+    margin: 0 10px;
+    display: none;
+}
+
+.col-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+.button-save {
+    color: white;
+    flex: 1;
+}
+
+.picked_img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2.5px solid green;
+    cursor: pointer;
+}
+
+.row-1 {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}

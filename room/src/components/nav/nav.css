@@ -1,0 +1,28 @@
+.nav {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    align-items: center;
+    overflow: hidden;
+    padding: 60px;
+
+}
+
+.nav h2 {
+    margin: 0%;
+    padding: 0%;
+    color: white;
+    font-size: 27px;
+}
+.nav a {
+    color: white;
+}
+.nav-list {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0%;
+    /* padding: 0%; */
+}

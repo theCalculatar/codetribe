@@ -1,0 +1,21 @@
+#root {
+  margin: 0;
+  padding: 5px 7% ;
+}
+
+.songs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.song-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-2 {
+  display: flex;
+  justify-content: space-between;
+}

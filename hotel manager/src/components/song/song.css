@@ -1,0 +1,29 @@
+.song {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 0 10px 1px rgba(171, 171, 171, 0.527)  ;
+    border-radius: 15px;
+    justify-content: space-between;
+    overflow: hidden;
+    align-items: center;
+}
+.song-row{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.btn {
+    margin: 0 20px;
+    padding: 10px;
+}
+.contextMenu {
+    position: absolute;
+    display: flex;
+}

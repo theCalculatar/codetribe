@@ -27,9 +27,11 @@
     padding: 10px;
     border-radius: 50px;
     color: white;
+    font-size: 14px;
 }
 .row_1 ul>li>a {
     text-decoration: none;
     display: flex;
     color: #000;
+    font-size: 14px;
 }

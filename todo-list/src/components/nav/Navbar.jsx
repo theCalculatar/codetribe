@@ -9,7 +9,7 @@ function Navbar() {
         <div className={style.col_1}>
             <h2>inotes</h2>
             <hr />
-            <a href='mailto:a@i.com'>info@inotes.com <FaArrowRightLong/></a>
+            <a href='mailto:info@inotes.com'>info@inotes.com <FaArrowRightLong/></a>
         </div>
         <div className={style.row_1}>
             <ul>

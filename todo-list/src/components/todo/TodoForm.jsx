@@ -1,33 +1,31 @@
 import React, { useState } from 'react'
 import styles from './todoForm.module.css'
 
-function TodoForm() {
+function TodoForm(props) {
     const [todo,setTodo] = useState('')
     const [description, setDescripton] = useState('')
     const [priority, setPriority] = useState(0)
     
     const formValidator = () =>{
-        localStorage.setItem('key',Math.random())
         let valid = true
-        // if(validator(todo)){
-        //     titleRef.current.classList.replace('show','hide')
-        // }else{
-        //     titleRef.current.classList.replace('hide','show')
-        //     valid = false
-        // }
-        // if(validator(description)){
-        //     albulmRef.current.classList.replace('show','hide')
-        // }else{
-        //     albulmRef.current.classList.replace('hide','show')
-        //     valid = false
-        // }
-        // if(valid){
-        //     addTodo()
-        // }
+        if(validator(todo)){
+            titleRef.current.classList.replace('show','hide')
+        }else{
+            titleRef.current.classList.replace('hide','show')
+            valid = false
+        }
+        if(validator(description)){
+            albulmRef.current.classList.replace('show','hide')
+        }else{
+            albulmRef.current.classList.replace('hide','show')
+            valid = false
+        }
+        if(valid){
+            addTodo()
+        }
     }
     const addTodo = ()=> {
-        localStorage.setItem('key','weeee')
-        console.log(localStorage.getItem('key'))
+        props.addTodo({todo, description, priority})
     }
     const validator = (value) => {
         const trimedValue = value.trim()
@@ -43,7 +41,7 @@ function TodoForm() {
             <option value="1">Medium</option>
             <option value="2">High</option>
         </select>
-        <button onClick={formValidator} className={styles.save_button}>Save</button>
+        <button onClick={addTodo} className={styles.save_button}>Save</button>
     </div>
   )
 }

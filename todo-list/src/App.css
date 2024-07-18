@@ -9,3 +9,11 @@
   margin: 0 10px;
   display: none;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

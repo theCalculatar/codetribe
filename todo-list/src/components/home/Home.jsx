@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import style from './home.module.css'
 import TodoForm from '../todo/TodoForm'
 import Todos from '../todo/Todos'
+import { redirect } from 'react-router-dom'
 
-function Home() {
+function Home({isLoggedIn}) {
   const [todos,setTodos] = useState(()=>{
     const local = localStorage.getItem('todos')
     return local?JSON.parse(local):[]
@@ -14,6 +15,12 @@ function Home() {
       return value!==todo
     }))
   }
+  useEffect(()=>{
+    if(!isLoggedIn){
+        redirect('/login')
+    }
+})
+
 
   const addTodos = ({todo,description,priority}) => {
     console.log({todo,description,priority})

@@ -3,12 +3,12 @@ import style from './navbar.module.css'
 import { TfiWorld } from "react-icons/tfi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Search from '../search/Search';
-import { useLocation } from 'react-router-dom';
+import { redirect, useLocation } from 'react-router-dom';
 
-function Navbar(props,{todos,home}) {
+function Navbar({isLoggedIn}) {
   // const home = props.home
-  const [isLoggenIn,setLogin] = useState(false)
   const location = useLocation()
+  const currentPath = location.pathname
 
   return (
     <div className={style.navbar} style={{}}>
@@ -17,11 +17,14 @@ function Navbar(props,{todos,home}) {
             <hr />
             <a href='mailto:info@inotes.com'>info@inotes.com <FaArrowRightLong/></a>
         </div>
-        {isLoggenIn && <Search todos={todos}/>}
+        {isLoggedIn && <Search/>}
         <div className={style.row_1}>
             <ul>
                 <li><a className={style.yyyy} href=""><TfiWorld/></a></li>
-                {!isLoggenIn&&<li>{location.pathname=='/login'?<a href="/register">Sign up</a>:<a href="login">Sign in</a>}</li>}
+                {!isLoggedIn && <li>{currentPath=='/login'?<a href="/register">Sign up</a>:
+                                  <a href="login">Sign in</a>}
+                                </li>
+                  }
                 <li><a id={style.demo} href="">Request Demo </a></li>
             </ul>
         </div>

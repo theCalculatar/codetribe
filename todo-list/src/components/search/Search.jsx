@@ -12,7 +12,7 @@ function Search() {
         return local?JSON.parse(local):[]}
     )
 
-    const datafiltered = todos.filter((el) => {
+    const datafiltered = todos?.filter((el) => {
         //if no input the return the original
         if (inputText === '') {
             // return []
@@ -21,11 +21,13 @@ function Search() {
         else {
             return el.todo.toLowerCase().includes(inputText)
         }
-    })
+    })       
+    
+    const local = localStorage.getItem('todos')
+
     useEffect(()=>{
-        const local = localStorage.getItem('todos')
         setTodos(JSON.parse(local))
-    })
+    },[])
 
   return (
     <div className={styles.content}>

@@ -1,15 +1,69 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from './register.module.css'
 import { FaGoogle } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
+import { useNavigate} from 'react-router-dom'
 
-function Register() {
-    const [Username, setUsername] = useState()
-    const [email, setEmail] = useState()
+function Register({setLogin,isLoggedIn}) {
+    const [username, setUsername] = useState()
+    const [name, setName] = useState()
     const [password, setPassword] = useState()
     const unameRef = useRef()
     const passRef = useRef()
+    const nameRef = useRef()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        if(isLoggedIn){
+            navigate('/',{replace:true})
+        }
+    })
+
+    const users = JSON.parse(localStorage.getItem('Users'))
+
+    const register = () => {
+        let valid = true
+
+        if(username?.toString.trim=='' || !username){
+            unameRef.current.classList.replace('hide','show')
+            unameRef.current.innerText='Username cannot be empty!'
+            valid = false
+        }else{
+            unameRef.current.classList.replace('show','hide')
+        }
+        if(name?.toString.trim=='' || !name){
+            nameRef.current.classList.replace('hide','show')
+            valid = false
+        }else{
+            nameRef.current.classList.replace('show','hide')
+        }
+        if(password?.toString.trim=='' || !password){
+            passRef.current.classList.replace('hide','show')
+            valid = false
+        }else{
+            passRef.current.classList.replace('show','hide')  
+        }
+        if(valid){
+            console.log()
+            if (users){
+                users?.filter(element => {
+                    console.log(element.username,username)
+                    if(element.username==username){
+                        unameRef.current.innerText='Username already exists!'
+                        unameRef.current.classList.replace('hide','show')
+                        return
+                    }
+                    else{
+                        localStorage.setItem('Users', JSON.stringify([...users,{name,username,password}]))
+                    }})  
+            }else {
+                localStorage.setItem('Users', JSON.stringify([{name,username,password}]))
+            }
+            setLogin(true)
+            navigate('/')
+        }
+    }
     
   return (
     <div className={style.container}>
@@ -18,16 +72,17 @@ function Register() {
             <div className={style.form}>
                 <div className={style.input_col}>
                     <input  type="text" onChange={event=>{
-                        setUsername(event.target.value)
-                    }} placeholder='Username' />
-                    <label ref={unameRef} className='error-input hide'>Username error!</label>
+                        setName(event.target.value)
+                    }} placeholder='Name' />
+                    <label ref={nameRef} className='error-input hide'>Field cannot be empty!</label>
                 </div>
                 <div className={style.input_col}>
-                    <input  type="email" onChange={event=>{
-                        setEmail(event.target.value)
-                    }} placeholder='Email' />
-                    <label ref={unameRef} className='error-input hide'>Invalid email!</label>
+                    <input  type="text" onChange={event=>{
+                        setUsername(event.target.value)
+                    }} placeholder='Username' />
+                    <label ref={unameRef} className='error-input hide'></label>
                 </div>
+
                 <div className={style.input_col}>
                     <input  type="password" onChange={event=>{
                         setPassword(event.target.value)
@@ -36,7 +91,7 @@ function Register() {
                 </div>
             </div>
             <a href='/'>Having trouble register?</a>
-            <a href="/" id={style.sign_btn}>Register</a>
+            <button  onClick={register} id={style.sign_btn}>Register</button>
             <div className={style.sign_in_options}>
                 <p>-- Or Sign up with --</p>
                 <ul>

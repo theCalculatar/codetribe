@@ -1,23 +1,26 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './todoForm.module.css'
 
 function TodoForm(props) {
     const [todo,setTodo] = useState('')
     const [description, setDescripton] = useState('')
     const [priority, setPriority] = useState(0)
+
+    const todoRef = useRef()
+    const desRef = useRef()
     
     const formValidator = () =>{
         let valid = true
         if(validator(todo)){
-            titleRef.current.classList.replace('show','hide')
+            todoRef.current.classList.replace('show','hide')
         }else{
-            titleRef.current.classList.replace('hide','show')
+            todoRef.current.classList.replace('hide','show')
             valid = false
         }
         if(validator(description)){
-            albulmRef.current.classList.replace('show','hide')
+            desRef.current.classList.replace('show','hide')
         }else{
-            albulmRef.current.classList.replace('hide','show')
+            desRef.current.classList.replace('hide','show')
             valid = false
         }
         if(valid){
@@ -34,14 +37,21 @@ function TodoForm(props) {
 
   return (
     <div className={styles.container}>
-        <input onChange={(e)=>setTodo(e.target.value)} type="text" placeholder='Add todo' />
-        <input type="" onChange={(e)=>setDescripton(e.target.value)} placeholder='Description' />
+        <div className={styles.inputs}>
+            <input onChange={(e)=>setTodo(e.target.value)} type="text" placeholder='Add todo' />
+            <label ref={todoRef} className='error-input hide'>title cannot be empty</label>  
+        </div>
+        <div className={styles.inputs}>
+            <input type="" onChange={(e)=>setDescripton(e.target.value)} placeholder='Description' />
+            <label ref={desRef} className='error-input hide'>description cannot be empty</label>
+        
+        </div>
         <select name="selector" onChange={(e)=>{setPriority(e.target.value)}} id="">
             <option value="0">Low</option>
             <option value="1">Medium</option>
             <option value="2">High</option>
         </select>
-        <button onClick={addTodo} className={styles.save_button}>Save</button>
+        <button onClick={formValidator} className={styles.save_button}>Save</button>
     </div>
   )
 }

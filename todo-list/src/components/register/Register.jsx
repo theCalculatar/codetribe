@@ -56,11 +56,12 @@ function Register({setLogin,isLoggedIn}) {
                     }
                     else{
                         localStorage.setItem('Users', JSON.stringify([...users,{name,username,password}]))
+                        // setLogin(true)
                     }})  
             }else {
                 localStorage.setItem('Users', JSON.stringify([{name,username,password}]))
             }
-            setLogin(true)
+            setLogin()
             navigate('/')
         }
     }

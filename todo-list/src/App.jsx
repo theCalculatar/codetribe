@@ -10,9 +10,10 @@ function App() {
 
   const [isLoggedIn,setLogin] = useState(()=>{
     const logged = localStorage.getItem('isLoggedIn')
-    return logged?true:false
+    return logged==null?false:logged=='true'
   })
   useEffect(()=>{
+    localStorage.setItem('isLoggedIn',isLoggedIn)
   },[isLoggedIn])
   
   return (
@@ -20,12 +21,8 @@ function App() {
       <Navbar isLoggedIn={isLoggedIn}/>
       <Routes>
         <Route element={<Home isLoggedIn={isLoggedIn}/>} path='/'> </Route>
-        <Route element={<Login isLoggedIn={isLoggedIn} setLogin={()=>{setLogin
-              localStorage.setItem('isLoggedIn',isLoggedIn)
-        }}/>}  path='/login'> </Route>
-        <Route element={<Register isLoggedIn={isLoggedIn} setLogin={()=>{setLogin 
-          localStorage.setItem('isLoggedIn',isLoggedIn)}
-        }/>} path='/register'> </Route>
+        <Route element={<Login isLoggedIn={isLoggedIn} setLogin={setLogin}/>}  path='/login'> </Route>
+        <Route element={<Register isLoggedIn={isLoggedIn} setLogin={setLogin}/>} path='/register'> </Route>
       </Routes>
     </BrowserRouter>
   )

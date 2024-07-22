@@ -4,8 +4,9 @@ import { TfiWorld } from "react-icons/tfi";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Search from '../search/Search';
 import { redirect, useLocation } from 'react-router-dom';
+import { LiaSignOutAltSolid } from "react-icons/lia";
 
-function Navbar({isLoggedIn}) {
+function Navbar({isLoggedIn,setLogin}) {
   // const home = props.home
   const location = useLocation()
   const currentPath = location.pathname
@@ -25,6 +26,9 @@ function Navbar({isLoggedIn}) {
                                   <a href="login">Sign in</a>}
                                 </li>
                   }
+                  {isLoggedIn && <li><a onClick={()=>{setLogin(false)
+                    window.location.reload
+                  }}><LiaSignOutAltSolid/></a></li>}
                 <li><a id={style.demo} href="">Request Demo </a></li>
             </ul>
         </div>

@@ -18,7 +18,7 @@ function App() {
   
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn}/>
+      <Navbar isLoggedIn={isLoggedIn} setLogin={setLogin}/>
       <Routes>
         <Route element={<Home isLoggedIn={isLoggedIn}/>} path='/'> </Route>
         <Route element={<Login isLoggedIn={isLoggedIn} setLogin={setLogin}/>}  path='/login'> </Route>

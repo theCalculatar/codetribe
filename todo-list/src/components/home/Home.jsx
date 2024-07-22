@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from './home.module.css'
 import TodoForm from '../todo/TodoForm'
 import Todos from '../todo/Todos'
-import { redirect, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Home({isLoggedIn}) {
   const navigate = useNavigate()
@@ -17,6 +17,13 @@ function Home({isLoggedIn}) {
       return value!==todo
     }))
   }
+  const editTodo = (element,index) =>{
+    const _todos = todos
+    todos[index] = element
+    console.log(_todos)
+    setTodos()
+
+  }
   useEffect(()=>{
     if(!isLoggedIn){
         navigate('/login')
@@ -25,8 +32,7 @@ function Home({isLoggedIn}) {
 
 
   const addTodos = ({todo,description,priority}) => {
-    console.log({todo,description,priority})
-    setTodos([...todos,{todo:todo,description:todo,priority:priority}])
+    setTodos([...todos,{todo:todo,description:description,priority:priority}])
   }
 
   useEffect(()=>{
@@ -38,7 +44,7 @@ function Home({isLoggedIn}) {
         <TodoForm addTodo={addTodos}/>
         <hr/>
         <div className={style.todo_section}>
-          <Todos todos= {todos} delTodo={delTodo}/>
+          <Todos todos= {todos} delTodo={delTodo} editTodo={editTodo}/>
         </div>
     </div>
   )

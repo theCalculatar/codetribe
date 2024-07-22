@@ -7,7 +7,9 @@
 .todo {
     position: relative;
     display: flex;
+    /* flex-direction: column; */
     min-width: 200px;
+    max-width: 320px;
     justify-content: space-between;
     padding: 10px 10px 10px 20px;
     border-radius: 20px;
@@ -15,8 +17,18 @@
     align-items: center;
     background-color: white;
 }
-.todo p, h4{
+.title,.title:active {
+    outline: none;
+    font-weight: 600;
     margin: 0;
+    padding: 0;
+}
+.description, .description:active{
+    outline: none;
+    font-size: 12px;
+    max-width: 320px;
+    margin: 0;
+    padding: 0;
 }
 .icon {
     width: 20px;

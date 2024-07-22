@@ -45,26 +45,27 @@ function Register({setLogin,isLoggedIn}) {
             passRef.current.classList.replace('show','hide')  
         }
         if(valid){
-            console.log()
+            let userExists = false
             if (users){
                 users?.filter(element => {
-                    console.log(element.username,username)
-                    if(element.username==username){
-                        unameRef.current.innerText='Username already exists!'
-                        unameRef.current.classList.replace('hide','show')
-                        return
-                    }
-                    else{
-                        localStorage.setItem('Users', JSON.stringify([...users,{name,username,password}]))
-                        // setLogin(true)
-                    }})  
-            }else {
-                localStorage.setItem('Users', JSON.stringify([{name,username,password}]))
+                    !userExists?(userExists = element.username==username):''
+                })
+                if(userExists){
+                    unameRef.current.innerText='Username already exists!'
+                    unameRef.current.classList.replace('hide','show')
+                    return
+                }
+                else{
+                    localStorage.setItem('Users', JSON.stringify([...users,{name,username,password}]))
+                }
             }
-            setLogin()
-            navigate('/')
+        }else {
+            localStorage.setItem('Users', JSON.stringify([{name,username,password}]))
         }
+            setLogin(true)
+            navigate('/')
     }
+
     
   return (
     <div className={style.container}>

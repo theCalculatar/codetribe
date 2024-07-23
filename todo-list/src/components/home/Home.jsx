@@ -18,11 +18,12 @@ function Home({isLoggedIn}) {
     }))
   }
   const editTodo = (element,index) =>{
-    const _todos = todos
-    todos[index] = element
-    console.log(_todos)
-    setTodos()
-
+    const _todos = [...todos]
+    console.log(element)
+    if(element.todo !== null && element.description !==null){
+      (_todos[index] = element)
+      setTodos(_todos)
+    }
   }
   useEffect(()=>{
     if(!isLoggedIn){
@@ -37,6 +38,7 @@ function Home({isLoggedIn}) {
 
   useEffect(()=>{
     localStorage.setItem('todos', JSON.stringify(todos))
+    console.log('here')
   },[todos])
 
   return (

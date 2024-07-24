@@ -3,43 +3,66 @@ import style from './home.module.css'
 import TodoForm from '../todo/TodoForm'
 import Todos from '../todo/Todos'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function Home({isLoggedIn}) {
   const navigate = useNavigate()
+  const BASE_URL = 'http://localhost:3001'
 
-  const [todos,setTodos] = useState(()=>{
-    const local = localStorage.getItem('todos')
-    return local?JSON.parse(local):[]
-  })
+  const [todos,setTodos] = useState([])
 
-  const delTodo = (todo)=>{
-    setTodos(todos.filter(value=>{
-      return value!==todo
-    }))
+  const delTodo = async (todo)=>{
+    try {
+      await axios.delete(`${BASE_URL}/todo/${todo.id}`)
+      setTodos(todos.filter(value=>{
+        return value!==todo
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+
   }
-  const editTodo = (element,index) =>{
+  const editTodo = async (element,index) =>{
     const _todos = [...todos]
-    console.log(element)
     if(element.todo !== null && element.description !==null){
       (_todos[index] = element)
-      setTodos(_todos)
+      try {
+        await axios.put(`${BASE_URL}/todo/${element.id}`,element)
+        setTodos(_todos)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
   useEffect(()=>{
-    if(!isLoggedIn){
-        navigate('/login')
+    //init cloud data
+    const nameless = async ()=>{
+      const response = await axios.get(`${BASE_URL}/todo`)
+      setTodos(response.data)
+      console.log(response.data)
     }
-})
+    
+    if(!isLoggedIn){
+      navigate('/login')
+    }else{
+      nameless()
+    }
+},[])
 
 
-  const addTodos = ({todo,description,priority}) => {
+  const addTodos = async ({todo,description,priority}) => {
+    try {
+      await axios.post(`${BASE_URL}/todo`, {todo:todo,description:description,priority:priority})
+    } catch (error) {
+      console.log(error)
+    }
     setTodos([...todos,{todo:todo,description:description,priority:priority}])
   }
 
-  useEffect(()=>{
-    localStorage.setItem('todos', JSON.stringify(todos))
-    console.log('here')
-  },[todos])
+  // useEffect(()=>{
+  //   // localStorage.setItem('todos', JSON.stringify(todos))
+  //   console.log('here')
+  // },[todos])
 
   return (
     <div className={style.home}>

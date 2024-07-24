@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { NavLink, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
 function Login({setLogin,isLoggedIn}) {
     const [username, setUsername] = useState()
@@ -11,17 +12,19 @@ function Login({setLogin,isLoggedIn}) {
     const passRef = useRef()
     const navigate = useNavigate()
 
+    const BASE_URL = 'http://localhost:3001'
+
+
     useEffect(()=>{
         console.log('here',isLoggedIn)
         if(isLoggedIn){
             navigate('/',{replace:true})
         }
-    })
+        
+    },[])
 
+    const login = async () => {  
 
-    const users = JSON.parse(localStorage.getItem('Users'))
-
-    const login = () => {
         let valid = true
 
         if(username?.toString.trim=='' || !username){
@@ -32,14 +35,14 @@ function Login({setLogin,isLoggedIn}) {
             passRef.current.classList.replace('hide','show')
             valid = false
         }  
-        if(valid){
-            users?.filter(element => {
-                if(element.username==username && element.password==password){
-                    setLogin(true)
-                    navigate('/',{replace:true})
-                    return 
-                }
-            })
+        if(valid){   
+            const response = await axios.get(`${BASE_URL}/users?username=${username}&password=${password}`)
+            console.log(response.status)
+            if(response.status==200){
+                setLogin(true)
+                navigate('/',{replace:true})
+                return 
+            }        
             passRef.current.classList.replace('hide','show')
         }
     }

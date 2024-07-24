@@ -50,11 +50,15 @@ app.post('/users',async (req, res) => {
 
 // Get all users
 app.get('/users', (req, res) => {
-
-    const {username,password} = res.body 
-    const sql = `SELECT * FROM user where username = ?, password = ?`;
-    const rows = db.prepare(sql).get(username,password);
-    res.json(rows);
+    const {username,password} = req.query
+    const sql = `SELECT * FROM users where username = ? and password = ?`;
+    const rows = db.prepare(sql).all(username,password);
+    console.log('lee',rows)
+    if(rows){
+        res.status(200).json(rows);
+    }else{
+        res.send(404).json([])
+    }
 });
 
 // Get a todo by id

@@ -27,7 +27,7 @@ function Navbar({isLoggedIn,setLogin}) {
                                 </li>
                   }
                   {isLoggedIn && <li><a onClick={()=>{setLogin(false)
-                    window.location.reload
+                    window.location.reload()
                   }}><LiaSignOutAltSolid/></a></li>}
                 <li><a id={style.demo} href="">Request Demo </a></li>
             </ul>

@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { useNavigate} from 'react-router-dom'
+import axios from 'axios';
 
 function Register({setLogin,isLoggedIn}) {
     const [username, setUsername] = useState()
@@ -14,15 +15,16 @@ function Register({setLogin,isLoggedIn}) {
     const nameRef = useRef()
     const navigate = useNavigate()
 
+    const BASE_URL = 'http://localhost:3001'
+
     useEffect(()=>{
         if(isLoggedIn){
             navigate('/',{replace:true})
         }
     })
 
-    const users = JSON.parse(localStorage.getItem('Users'))
 
-    const register = () => {
+    const register = async () => {
         let valid = true
 
         if(username?.toString.trim=='' || !username){
@@ -45,25 +47,17 @@ function Register({setLogin,isLoggedIn}) {
             passRef.current.classList.replace('show','hide')  
         }
         if(valid){
-            let userExists = false
-            if (users){
-                users?.filter(element => {
-                    !userExists?(userExists = element.username==username):''
-                })
-                if(userExists){
-                    unameRef.current.innerText='Username already exists!'
-                    unameRef.current.classList.replace('hide','show')
-                    return
-                }
-                else{
-                    localStorage.setItem('Users', JSON.stringify([...users,{name,username,password}]))
-                }
+            try{
+                await axios.post(`${BASE_URL}/users`, {password:password,username:username,name:name})
+                setLogin(true)
+                navigate('/')
+            }catch(error){
+                console.log(error)
+                unameRef.current.innerText='Username already exists!'
+                unameRef.current.classList.replace('hide','show')
+                return 
             }
-        }else {
-            localStorage.setItem('Users', JSON.stringify([{name,username,password}]))
         }
-            setLogin(true)
-            navigate('/')
     }
 
     

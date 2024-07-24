@@ -39,7 +39,7 @@ app.post('/users',async (req, res) => {
         WHERE username = ?
     `
     const row =  db.prepare(checkUser).get(username)
-    console.log('lee',row)
+    // console.log('lee',row)
     if (row){
         res.status(400).json({ error: 'User already exists' });
     }else{
@@ -49,15 +49,16 @@ app.post('/users',async (req, res) => {
 });
 
 // Get all users
-app.get('/users', (req, res) => {
+app.get('/users', async (req, res) => {
     const {username,password} = req.query
     const sql = `SELECT * FROM users where username = ? and password = ?`;
-    const rows = db.prepare(sql).all(username,password);
-    console.log('lee',rows)
-    if(rows){
-        res.status(200).json(rows);
+    const rows = await db.prepare(sql).get(username,password);
+
+    console.log('lee',rows==undefined)
+    if(rows!==undefined){
+        res.json(rows)
     }else{
-        res.send(404).json([])
+        res.status(404).json({error:'jfjf'});
     }
 });
 

@@ -36,14 +36,17 @@ function Login({setLogin,isLoggedIn}) {
             valid = false
         }  
         if(valid){   
-            const response = await axios.get(`${BASE_URL}/users?username=${username}&password=${password}`)
-            console.log(response.status)
-            if(response.status==200){
-                setLogin(true)
-                navigate('/',{replace:true})
-                return 
-            }        
-            passRef.current.classList.replace('hide','show')
+            try {
+                const response = await axios.get(`${BASE_URL}/users?username=${username}&password=${password}`)
+                console.log(response.status)
+                if(response.status==200){
+                    setLogin(true)
+                    navigate('/',{replace:true})
+                    return 
+                }        
+            } catch (error) {
+                passRef.current.classList.replace('hide','show')
+            }
         }
     }
 

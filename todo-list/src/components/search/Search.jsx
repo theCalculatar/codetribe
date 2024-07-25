@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 // import './search.module.css'
 import styles from './search.module.css'
+import axios from 'axios'
 function Search() {
+    const BASE_URL = 'http://localhost:3001'
+
     const [inputText, setInputText] = useState('')
     const inputHandler = (e) =>{
         let lowerCase = e.target.value.toLowerCase()
         setInputText(lowerCase)
     }
-    const [todos,setTodos] = useState( ()=>{ 
-        const local = localStorage.getItem('todos')
-        return local?JSON.parse(local):[]}
-    )
+    const [todos,setTodos] = useState([])
 
     const datafiltered = todos?.filter((el) => {
         //if no input the return the original
@@ -23,10 +23,16 @@ function Search() {
         }
     })       
     
-    const local = localStorage.getItem('todos')
+    // const response = axios.get(`${BASE_URL}/todo`)
+    // const local = response.data
 
     useEffect(()=>{
-        setTodos(JSON.parse(local))
+        const  search = async ()=>{ 
+            const response = await axios.get(`${BASE_URL}/todo`)
+            const local = response.data
+            setTodos(local)
+        }
+        search()
     },[])
 
   return (

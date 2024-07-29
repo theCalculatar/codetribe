@@ -1,0 +1,11 @@
+.home {
+    padding: 0 10%;
+    margin-top: 30px;
+    display:flex;
+    height: 100%;
+    gap: 30px;
+
+}
+.todo_section {
+    flex: 1;
+}

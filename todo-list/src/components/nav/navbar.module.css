@@ -1,0 +1,38 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10%;
+
+}
+.col_1 h2{
+    margin: 0;
+    cursor: pointer;
+}
+.col_1 a {
+    text-decoration: none;
+    color: #000; 
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 12px;
+}
+.row_1 ul {
+    display: flex;
+    gap: 37px;
+    list-style: none;
+    align-items: center;
+}
+#demo{
+    background-color: #ffc273;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    font-size: 14px;
+}
+.row_1 ul>li>a {
+    text-decoration: none;
+    display: flex;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+}

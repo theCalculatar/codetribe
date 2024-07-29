@@ -1,53 +1,28 @@
 import React from 'react'
-import imege from '../../assets/images/desktop-image-hero-1.jpg'
 import './hero.css'
-import fowardE from '../../assets/images/icon-arrow.svg'
-import Slider from 'react-slick'
+import ImageSlider from '../slider/ImageSlider'
 
 function Hero() {
-  var settings = {
-        dots: false,
-        infinite: false,
-        // speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      };
   return (
-        <Slider {...settings} className='slider'>
-          <div className='container-hero'>
-              <img src={imege} alt="img" />
-              <div className='col-hero'>
-                <div className='text-description'>
-                  <h1>Discover innovative ways to decorate</h1>
-                  <p>We provide unmatched quality, comfort, and style for property owners across the country. 
-                    Our experts combine form and function in bringing your vision to life. Create a room in your 
-                    own style with our collection and make your property a reflection of you and what you love.</p>
-                    <a className='shop-a' href="">Shop now <img src={fowardE}/></a>
-                </div>
-                <div className='a-pagers'>
-                  <a className='icon-a' href=""><img src={'/src/assets/images/icon-angle-left.svg'} width='100px' height='100px' className='icon'/></a>
-                  <a className='icon-a' href=""><img src={'/src/assets/images/icon-angle-right.svg'} className='icon'/></a>
-                </div>
-              </div>        
-          </div>
-          <div className='container-hero'>
-              <img src={imege} alt="img" />
-              <div className='col-hero'>
-                <div className='text-description'>
-                  <h1>Discover innovative ways to decorate</h1>
-                  <p>We provide unmatched quality, comfort, and style for property owners across the country. 
-                    Our experts combine form and function in bringing your vision to life. Create a room in your 
-                    own style with our collection and make your property a reflection of you and what you love.</p>
-                    <a className='shop-a' href="">Shop now <img src={fowardE}/></a>
-                </div>
-                <div className='a-pagers'>
-                  <a className='icon-a' href=""><img src={'/src/assets/images/icon-angle-left.svg'} width='100px' height='100px' className='icon'/></a>
-                  <a className='icon-a' href=""><img src={'/src/assets/images/icon-angle-right.svg'} className='icon'/></a>
-                </div>
-              </div>        
-          </div>
-        </Slider>
-    
+        <ImageSlider className='slider' list={[
+          { image:'/src/assets/images/desktop-image-hero-1.jpg',
+            title:'Discover innovative ways to decorate',
+            description:`We provide unmatched quality, comfort, and style for property owners across the country. 
+            Our experts combine form and function in bringing your vision to life. Create a room in your 
+            own style with our collection and make your property a reflection of you and what you love.`},
+          {
+            image:'/src/assets/images/desktop-image-hero-2.jpg',
+            title:'  We are available all across the globe',
+            description:` With stores all over the world, it's easy for you to find furniture for your home or place of business. 
+              Locally, we’re in most major cities throughout the country. Find the branch nearest you using our 
+              store locator. Any questions? Don't hesitate to contact us today.
+            `},
+          {image:'/src/assets/images/desktop-image-hero-3.jpg',
+            title:'Manufactured with the best materials',
+            description:`Our modern furniture store provide a high level of quality. Our company has invested in advanced technology 
+              to ensure that every product is made as perfect and as consistent as possible. With three decades of 
+              experience in this industry, we understand what customers want for their home and office.
+            `}]}/>
   )
 }
 

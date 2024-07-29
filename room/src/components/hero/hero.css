@@ -10,16 +10,15 @@
 }
 .icon-a {
     padding: 30px;
+    object-fit: cover;
     background-color: black;
 }
 .icon-a:hover {
     background-color: var(--color-v-dark-grey-);
 }
 .icon-a img {
-    color: white;
-    width: 1000px;
-    height: 1000px;
-    max-width: max-content;
+    width: 100px;
+    height: 100px;
 }
 .col-hero {
     display: flex;

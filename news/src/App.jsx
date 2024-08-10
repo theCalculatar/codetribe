@@ -1,5 +1,6 @@
 
 import './App.css'
+import EditorsPick from './components/editorsPick/EditorsPick'
 import Intro from './components/intro/Intro'
 import LatestNews from './components/latestNews/LatestNews'
 import MustRead from './components/mustRead/MustRead'
@@ -14,6 +15,7 @@ function App() {
       <TopNews/>
       <LatestNews/>
       <MustRead/>
+      <EditorsPick/>
     </div>
   )
 }

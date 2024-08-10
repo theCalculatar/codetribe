@@ -1,0 +1,88 @@
+
+.container {
+    margin: 0 10%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #E61E23;
+}
+.card {
+    /* width: 250px; */
+    flex: 1;
+}
+.card p {
+    font-size: 12px
+}
+.card>h3 {
+    line-height: 1;
+    margin: 10px 0;
+}
+.card >img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.source {
+    display: flex;
+    gap: 5px;
+    align-items: center;   
+}
+.source img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+.catg {
+    display: flex;
+    align-items: center;
+}
+.p_catg {
+    color: #E61E23;
+
+}
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+/* MIDDLE */
+
+.middle {
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+
+}
+.middle>img {
+    width: 100%;
+    border-radius: 10px;
+    height: 480px;
+}
+
+.abs {
+    position: absolute;
+    bottom: 0;
+    margin: 20px 30px ;
+    color: white;
+}
+.abs p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: 12px;
+    -webkit-box-orient: vertical;
+}

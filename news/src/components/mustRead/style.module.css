@@ -31,7 +31,7 @@
     margin: 10px 0;
 }
 .left >img {
-    min-width: 100%;
+    width: 100%;
     height: 200px;
     border-radius: 10px;
 }
@@ -53,6 +53,7 @@
 }
 .p_catg {
     color: #E61E23;
+    font-weight: 600;
 
 }
 /* MIDDLE */
@@ -68,13 +69,18 @@
     width: 100%;
     border-radius: 10px;
     height: 480px;
+    object-fit: cover;
 }
 
 .abs {
     position: absolute;
     bottom: 0;
-    margin: 20px 30px ;
+    padding: 20px 30px ;
+    overflow: hidden;
     color: white;
+    background-image: linear-gradient(red, #000);
+    border-radius:  0 0 10px 10px ;
+
 }
 .abs p{
     overflow: hidden;

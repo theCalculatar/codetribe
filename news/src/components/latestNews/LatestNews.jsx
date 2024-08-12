@@ -1,10 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import style from './latest.module.css'
 import { LuDot } from 'react-icons/lu'
+import axios from 'axios'
 
 function LatestNews() {
-    const latest = useState(()=>{return['','','','']})
-    console.log(latest)
+    // const API_KEY = '7d098d91d1234b9393a9a4ca62806d8e'
+
+    const [latest, setLatest] = useState([])
+
+    useEffect(()=>{
+        const getNews = async () =>{
+            try {
+                const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=everything&pageSize=4&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`)
+                    setLatest(newsApi.data.articles)
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+        getNews()
+    },[])
   return (
     <div className={style.container}>
         <div className={style.top}>
@@ -13,25 +27,23 @@ function LatestNews() {
         </div>   
         <div className={style.cards}>
             {
-                latest[0].map(element=>{
-                    return <div className={style.card}>
-                               <img src="../public/me_pic.jpg" alt="" />
+                latest.map(element=>{
+                    return (<div className={style.card}>
+                               <img src={element.urlToImage} alt="" />
                                 <div className={style.source}>
-                                    <img src="../public/me_pic.jpg" alt="" />
-                                    <p>Netflix</p>
+                                    <img src={element.urlToImage} alt="" />
+                                    <p>{element?.author}</p>
                                     <LuDot/>
                                     <p>12 minutes ago</p>
                                 </div>
-                                <h3>Where To Watch 'John Wick: Chapter 4'</h3>
-                                <p>There's been no official announcement regarding John Wick:
-                                    Chapter 4's streaming release. However, given it's a Lionsgate
-                                    film, John Wick: Chapter 4 will eventually be released on Starz,.</p>
+                                <h3>{element?.title}</h3>
+                                <p>{element?.description}</p>
                                 <div className={style.catg}>
-                                    <p className={style.p_catg}>Movies</p>
+                                    <p className={style.p_catg}>{element?.source.name}</p>
                                     <LuDot/>
                                     <p>4 min read</p>
                                 </div>
-                            </div>
+                            </div>)
                 })
             }
         </div>

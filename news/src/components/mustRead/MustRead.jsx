@@ -1,84 +1,100 @@
-import React from 'react'
+import {React, useEffect,useState} from 'react'
 import style from './style.module.css'
 import { LuDot } from 'react-icons/lu'
+import axios from 'axios'
+import postedDate from '../../utils/Utils.js'
 
 function MustRead() {
+    const [latest, setLatest] = useState([])
+
+    useEffect(()=>{
+        const getNews = async () =>{
+            try {
+                const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=world&pageSize=4&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`)
+                setLatest(newsApi.data.articles)
+                setTopPart(newsApi.data.articles[0])
+            } catch (error) {
+                console.log(error)
+            }
+        } 
+        getNews()
+    },[])
   return (
     <div className={style.container}>
         <div className={style.top}>
             <h1>Must read</h1> 
             <a href="">See all</a>
-        </div>         <div className={style.content}>
-            <div className={style.left}>
-                <img src="../public/me_pic.jpg" alt="" />
-                <div className={style.source}>
-                    <img src="../public/me_pic.jpg" alt="" />
-                    <p>Netflix</p>
-                    <LuDot/>
-                    <p>12 minutes ago</p>
+        </div>
+            <div className={style.content}>
+                <div className={style.left}>
+                    <img src={latest[0]?.urlToImage} alt="" />
+                    <div className={style.source}>
+                        <img src={latest[0]?.urlToImage} alt="" />
+                        <p>{latest[0]?.author}</p>
+                        <LuDot/>
+                        <p>{postedDate(latest[0]?.publishedAt)}</p>
+                    </div>
+                    <h3>{latest[0]?.title}</h3>
+                    <p>{latest[0]?.description}</p>
+                    <div className={style.catg}>
+                        <p className={style.p_catg}>Movies</p>
+                        <LuDot/>
+                        <p>4 min read</p>
+                    </div>
                 </div>
-                <h3>Where To Watch 'John Wick: Chapter 4'</h3>
-                <p>There's been no official announcement regarding John Wick:
-                    Chapter 4's streaming release. However, given it's a Lionsgate
-                    film, John Wick: Chapter 4 will eventually be released on Starz,.</p>
-                <div className={style.catg}>
-                    <p className={style.p_catg}>Movies</p>
-                    <LuDot/>
-                    <p>4 min read</p>
-                </div>
-            </div>
             {/* MIDDLE PART */}
-            <div className={style.middle}>
-                <img src="../public/me_pic.jpg" alt="" />
-                <div className={style.abs}>
-                    <div className={style.source}>
-                    <img src="../public/me_pic.jpg" alt="" />
-                        <p>Netflix</p>
-                        <LuDot/>
-                        <p>12 minutes ago</p>
-                    </div>
-                    <h3>Where To Watch 'John Wick: Chapter 4'</h3>
-                    <p>There's been no official announcement regarding John Wick:
-                        Chapter 4's streaming release. However, given it's a Lionsgate
-                        film, John Wick: Chapter 4 will eventually be released on Starz,.</p>
-                    <div className={style.catg}>
-                        <p className={style.p_catg}>Movies</p>
-                        <LuDot/>
-                        <p>4 min read</p>
-                    </div>                     
-                </div>
-            </div>
-            <div className={style.right}>
-                <div className={style.card}>
-                    <img src="../public/me_pic.jpg" alt="" />
-                    <div className={style.source}>
-                        <p>Netflix</p>
-                        <LuDot/>
-                        <p>12 minutes ago</p>
-                    </div>
-                    <h3>Where To Watch 'John Wick: Chapter 4'</h3>
-                    <div className={style.catg}>
-                        <p className={style.p_catg}>Movies</p>
-                        <LuDot/>
-                        <p>4 min read</p>
-                    </div>
-                </div>
-                <div className={style.card}>
-                    <img src="../public/me_pic.jpg" alt="" />
-                    <div className={style.source}>
-                        <p>Netflix</p>
-                        <LuDot/>
-                        <p>12 minutes ago</p>
-                    </div>
-                    <h3>Where To Watch 'John Wick: Chapter 4'</h3>
-                    <div className={style.catg}>
-                        <p className={style.p_catg}>Movies</p>
-                        <LuDot/>
-                        <p>4 min read</p>
+                <div className={style.middle}>
+                    <img src={latest[1]?.urlToImage} alt="" />
+                    <div className={style.abs}>
+                        <div className={style.source}>
+                        <img src="../public/me_pic.jpg" alt="" />
+                        <p>{latest[1]?.author}</p>
+                            <LuDot/>
+                            <p>{postedDate(latest[1]?.publishedAt)}</p>
+                        </div>
+                        <h3>{latest[1]?.title}</h3>
+                        <p>{latest[1]?.description}</p>
+
+                        <div className={style.catg}>
+                            <p className={style.p_catg}>Movies</p>
+                            <LuDot/>
+                            <p>4 min read</p>
+                        </div>                     
                     </div>
                 </div>
 
-            </div>
+            {/* RIGHT PART */}
+                <div className={style.right}>
+                    <div className={style.card}>
+                        <img src={latest[2]?.urlToImage} alt="" />
+                        <div className={style.source}>
+                        <p>{latest[2]?.author}</p>
+                            <LuDot/>
+                            <p>{postedDate(latest[2]?.publishedAt)}</p>
+                        </div>
+                        <h3>{latest[2]?.title}</h3>
+                        <div className={style.catg}>
+                            <p className={style.p_catg}>Movies</p>
+                            <LuDot/>
+                            <p>{postedDate(latest[2]?.publishedAt)}</p>
+                        </div>
+                    </div>
+                    <div className={style.card}>
+                        <img src={latest[3]?.urlToImage} alt="" />
+                        <div className={style.source}>
+                        <p>{latest[3]?.author}</p>
+                            <LuDot/>
+                            <p>{postedDate(latest[0]?.publishedAt)}</p>
+                        </div>
+                        <h3>{latest[3]?.title}</h3>
+                        <div className={style.catg}>
+                            <p className={style.p_catg}>Movies</p>
+                            <LuDot/>
+                            <p>4 min read</p>
+                        </div>
+                    </div>
+
+                </div>
         </div>
     </div>
   )

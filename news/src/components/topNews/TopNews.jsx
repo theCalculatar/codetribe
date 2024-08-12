@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import style from './topNews.module.css'
+import React, { useEffect, useState } from 'react';
+import style from './topNews.module.css';
 import { LuDot } from "react-icons/lu";
 import axios from 'axios';
+import postedDate from '../../utils/Utils';
 
 function TopNews() {
-    const API_KEY = '7d098d91d1234b9393a9a4ca62806d8e'
+  const [news, setTopPart] = useState(null);
+  const [error, setError] = useState(null);
 
-    const [latest, setLatest] = useState([])
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=netflix&pageSize=1&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`);
+        setLatest(newsApi.data.articles);
+        setTopPart(newsApi.data.articles[0]);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    getNews();
+  }, []);
 
-    const [news, setTopPart] = useState(null)
-    useEffect(()=>{
-        const getNews = async () =>{
-            try {
-                const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=netflix&pageSize=1&sortBy=relevancy&from=2024-08-08&apiKey=${API_KEY}`)
-                    setLatest(newsApi.data.articles)
-                    setTopPart(newsApi.data.articles[0])
-            } catch (error) {
-                console.log(error)
-            }
-        } 
-        getNews()
-    },[])
   return (
     <div className={style.top_news}>
-        <img className={style.img_left} src={news?.urlToImage} alt="img" />
-        <div className={style.right}>
+      {error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <>
+          <img className={style.img_left} src={news?.urlToImage} alt="img" />
+          <div className={style.right}>
             <div className={style.source}>
-                <img src={news?.urlToImage} alt="" />
-                <p>{news?.author}</p>
-                <LuDot/>
-                <p>12 minutes ago</p>
+              <img src={news?.urlToImage} alt="" />
+              <p>{news?.author}</p>
+              <LuDot />
+              <p>{postedDate(news?.publishedAt)}</p>
             </div>
             <h1>{news?.title}</h1>
             <p>{news?.description}</p>
             <div className={style.catg}>
-                <p >{news?.source.name}</p>
-                <LuDot/>
-                <p>4 min read</p>
+              <p>{news?.source.name}</p>
+              <LuDot />
+              <p>4 min read</p>
             </div>
-        </div>
-        
+          </div>
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default TopNews
+export default TopNews;

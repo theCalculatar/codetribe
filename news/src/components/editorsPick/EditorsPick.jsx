@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import style from './editors.module.css'
 import { LuDot } from 'react-icons/lu'
 import axios from 'axios'
-import postedDate from '../../utils/Utils'
+import {postedDate, timeToRead } from '../../utils/Utils'
+// import t from '../../utils/Utils'
 
 function EditorsPick() {
     const [latest, setLatest] = useState([])
@@ -57,7 +58,7 @@ function EditorsPick() {
                     }
                 })
                 ?.map((element,key)=>{
-                    // console.log(element)
+                    console.log()
                     return(
                         <div key={key} className={style.card}>
                             <img src={element.urlToImage} alt="" />
@@ -71,8 +72,8 @@ function EditorsPick() {
                             <div className={style.catg}>
                                 <p className={style.p_catg}>{element.source.name}</p>
                                 <LuDot/>
-                                <p>4 min read</p>
-                            </div>
+                                <p>{element?timeToRead(element?.content):''}</p>
+                                </div>
                         </div>)
                 })
             }

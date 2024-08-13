@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react'
 import style from './latest.module.css'
 import { LuDot } from 'react-icons/lu'
 import axios from 'axios'
+import { postedDate, timeToRead } from '../../utils/Utils'
+
 
 function LatestNews() {
     // const API_KEY = '7d098d91d1234b9393a9a4ca62806d8e'
@@ -34,15 +36,15 @@ function LatestNews() {
                                     <img src={element.urlToImage} alt="" />
                                     <p>{element?.author}</p>
                                     <LuDot/>
-                                    <p>12 minutes ago</p>
+                                    <p>{postedDate(element?.publishedAt)}</p>
                                 </div>
                                 <h3>{element?.title}</h3>
                                 <p>{element?.description}</p>
                                 <div className={style.catg}>
                                     <p className={style.p_catg}>{element?.source.name}</p>
                                     <LuDot/>
-                                    <p>4 min read</p>
-                                </div>
+                                    <p>{latest[0]?timeToRead(latest[0]?.content):''}</p>
+                                    </div>
                             </div>)
                 })
             }

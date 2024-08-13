@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './topNews.module.css';
 import { LuDot } from "react-icons/lu";
 import axios from 'axios';
-import postedDate from '../../utils/Utils';
+import {postedDate, timeToRead} from '../../utils/Utils';
 
 function TopNews() {
   const [news, setTopPart] = useState(null);
@@ -12,7 +12,7 @@ function TopNews() {
     const getNews = async () => {
       try {
         const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=netflix&pageSize=1&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`);
-        setLatest(newsApi.data.articles);
+        // setLatest(newsApi.data.articles);
         setTopPart(newsApi.data.articles[0]);
       } catch (error) {
         setError(error.message);
@@ -40,8 +40,8 @@ function TopNews() {
             <div className={style.catg}>
               <p>{news?.source.name}</p>
               <LuDot />
-              <p>4 min read</p>
-            </div>
+              <p>{news?timeToRead(news?.content):''}</p>
+              </div>
           </div>
         </>
       )}

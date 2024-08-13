@@ -2,7 +2,7 @@ import {React, useEffect,useState} from 'react'
 import style from './style.module.css'
 import { LuDot } from 'react-icons/lu'
 import axios from 'axios'
-import postedDate from '../../utils/Utils.js'
+import {postedDate,timeToRead} from '../../utils/Utils.js'
 
 function MustRead() {
     const [latest, setLatest] = useState([])
@@ -12,7 +12,6 @@ function MustRead() {
             try {
                 const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=world&pageSize=4&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`)
                 setLatest(newsApi.data.articles)
-                setTopPart(newsApi.data.articles[0])
             } catch (error) {
                 console.log(error)
             }
@@ -39,7 +38,7 @@ function MustRead() {
                     <div className={style.catg}>
                         <p className={style.p_catg}>Movies</p>
                         <LuDot/>
-                        <p>4 min read</p>
+                        <p>{latest[0]?timeToRead(latest[0]?.content):''}</p>
                     </div>
                 </div>
             {/* MIDDLE PART */}
@@ -58,8 +57,8 @@ function MustRead() {
                         <div className={style.catg}>
                             <p className={style.p_catg}>Movies</p>
                             <LuDot/>
-                            <p>4 min read</p>
-                        </div>                     
+                            <p>{latest[0]?timeToRead(latest[0]?.content):''}</p>
+                            </div>                     
                     </div>
                 </div>
 
@@ -76,7 +75,7 @@ function MustRead() {
                         <div className={style.catg}>
                             <p className={style.p_catg}>Movies</p>
                             <LuDot/>
-                            <p>{postedDate(latest[2]?.publishedAt)}</p>
+                            <p>{latest[2]?timeToRead(latest[2]?.content):''}</p>
                         </div>
                     </div>
                     <div className={style.card}>
@@ -84,14 +83,14 @@ function MustRead() {
                         <div className={style.source}>
                         <p>{latest[3]?.author}</p>
                             <LuDot/>
-                            <p>{postedDate(latest[0]?.publishedAt)}</p>
+                            <p>{postedDate(latest[3]?.publishedAt)}</p>
                         </div>
                         <h3>{latest[3]?.title}</h3>
                         <div className={style.catg}>
                             <p className={style.p_catg}>Movies</p>
                             <LuDot/>
-                            <p>4 min read</p>
-                        </div>
+                            <p>{latest[3]?timeToRead(latest[3]?.content):''}</p>
+                            </div>
                     </div>
 
                 </div>

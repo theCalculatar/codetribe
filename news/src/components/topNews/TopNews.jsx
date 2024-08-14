@@ -23,9 +23,7 @@ function TopNews() {
 
   return (
     <div className={style.top_news}>
-      {error ? (
-        <p>Error: {error}</p>
-      ) : (
+      {(
         <>
           <img className={style.img_left} src={news?.urlToImage} alt="img" />
           <div className={style.right}>

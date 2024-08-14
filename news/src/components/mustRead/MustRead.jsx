@@ -55,10 +55,10 @@ function MustRead() {
                         <p>{latest[1]?.description}</p>
 
                         <div className={style.catg}>
-                            <p className={style.p_catg}>Movies</p>
-                            <LuDot/>
-                            <p>{latest[0]?timeToRead(latest[0]?.content):''}</p>
-                            </div>                     
+                        <p className={style.p_catg}>{latest[1]?.source.name}</p>
+                        <LuDot/>
+                        <p>{latest[1]?timeToRead(latest[1]?.content):''}</p>
+                    </div>                     
                     </div>
                 </div>
 
@@ -73,10 +73,10 @@ function MustRead() {
                         </div>
                         <h3>{latest[2]?.title}</h3>
                         <div className={style.catg}>
-                            <p className={style.p_catg}>Movies</p>
+                            <p className={style.p_catg}>{latest[2]?.source.name}</p>
                             <LuDot/>
-                            <p>{latest[2]?timeToRead(latest[2]?.content):''}</p>
-                        </div>
+                            {/* <p>{latest[2]?timeToRead(latest[2]?.content):''}</p> */}
+                            </div>
                     </div>
                     <div className={style.card}>
                         <img src={latest[3]?.urlToImage} alt="" />
@@ -87,9 +87,9 @@ function MustRead() {
                         </div>
                         <h3>{latest[3]?.title}</h3>
                         <div className={style.catg}>
-                            <p className={style.p_catg}>Movies</p>
-                            <LuDot/>
-                            <p>{latest[3]?timeToRead(latest[3]?.content):''}</p>
+                        <p className={style.p_catg}>{latest[3]?.source.name}</p>
+                        <LuDot/>
+                            {/* <p>{(latest[3]?timeToRead(latest[3].content):'')}</p> */}
                             </div>
                     </div>
 

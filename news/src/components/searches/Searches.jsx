@@ -1,29 +1,28 @@
 import React, { useState,useEffect } from 'react'
-import style from './latest.module.css'
+import style from './style.module.css'
 import { LuDot } from 'react-icons/lu'
 import axios from 'axios'
 import { postedDate, timeToRead } from '../../utils/Utils'
 
 
-function LatestNews() {
+function Searches({q}) {
     const [latest, setLatest] = useState([])
 
     useEffect(()=>{
         const getNews = async () =>{
             try {
-                const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=everything&pageSize=4&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`)
+                const newsApi = await axios.get(`https://newsapi.org/v2/everything?q=${q}&pageSize=4&sortBy=relevancy&from=2024-08-08&apiKey=${import.meta.env.VITE_API_KEY}`)
                     setLatest(newsApi.data.articles)
             } catch (error) {
                 console.log(error)
             }
         } 
         getNews()
-    },[])
+    },[q])
   return (
     <div className={style.container}>
         <div className={style.top}>
-            <h1>Latest news</h1> 
-            <a href="">See all</a>
+            <h1>{q}</h1> 
         </div>   
         <div className={style.cards}>
             {
@@ -51,4 +50,4 @@ function LatestNews() {
   )
 }
 
-export default LatestNews
+export default Searches

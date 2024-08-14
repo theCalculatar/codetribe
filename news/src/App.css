@@ -7,3 +7,15 @@ body {
 p {
   font-size: 14px;
 }
+.categories{
+  display: flex;
+  list-style: none;
+  gap: 37px;
+  margin: 10px 0%;
+  justify-content: center;
+}
+.categories li {
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}

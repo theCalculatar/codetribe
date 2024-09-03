@@ -1,20 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { Button, Checkbox, Stack, TextField, Typography, IconButton, Icon } from '@mui/material';
 import {Google,FacebookTwoTone} from '@mui/icons-material';
 import bg from '../../assets/shopping-mall.jpg'
-import { Link } from "react-router-dom";
-import { teal } from '@mui/material/colors';
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function Register() {
   const [password,setPassword] = useState('')
   const [name,setName] = useState('')
-  const [email,setEmail] = useState('')
+  const [username,setUsername] = useState('')
+  const navigate = useNavigate()
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  const BASE_URL = 'http://localhost:3000'
 
-  const login = ()=>{
-
+  const register = ()=>{
+    axios.post(BASE_URL+`/users`,{username,password,name})
+      .then(value=>{
+        if (value.status==201) {
+          localStorage.setItem('isLoggedIn',true) 
+          navigate('/')
+        }
+      })
   }
+  useEffect(()=>{
+    //init cloud data
+    const isLoggedIn = localStorage.getItem('isLoggedIn') !== null
+    if(isLoggedIn){
+      navigate('/')
+    }
+},[])
 
   return (
     <Box display={'flex'} height={700} flexDirection={"column"} justifyContent={'center'} alignItems={'center'} >
@@ -31,8 +47,8 @@ function Register() {
             label='Email or Phone Number'
             variant='standard'
             type='email'
-            value={email}
-            onChange={(event)=>setEmail(event.target.value)} 
+            value={username}
+            onChange={(event)=>setUsername(event.target.value)} 
             />
           <TextField
             id="password"
@@ -51,10 +67,10 @@ function Register() {
           </Box>
 
           <Button
-            onClick={login}
+            onClick={register}
             sx={{fontSize:16,fontWeight:600,bgcolor:'#00796b',color:'white',borderRadius:5,mt:3}}  
             >
-              log in
+              Register
           </Button>
           <Typography textAlign={'center'} mt={3} fontSize={14}>Log in with</Typography>
           <Box sx={{display:'flex',justifyContent:'center'}} >

@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "id": "bd66",
+      "name": "lee",
+      "username": "lee",
+      "password": "mmm"
+    }
+  ],
+  "list": [
+    {
+      "name": "bruh",
+      "notes": "gg",
+      "tag": "shoes",
+      "quantity": "5",
+      "id": "5f0b"
+    },
+    {
+      "name": "Lee",
+      "notes": "NOtes",
+      "tag": "vegetables",
+      "quantity": "4",
+      "id": "d18a"
+    },
+    {
+      "name": "Mavhi",
+      "notes": "egtgtth",
+      "tag": "vegetables",
+      "quantity": 0,
+      "id": "5178"
+    }
+  ]
+}

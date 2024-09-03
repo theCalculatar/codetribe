@@ -1,0 +1,58 @@
+.content {
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    align-self: center;
+    /* padding: 30px;  */
+    
+}
+.content input{
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid black;
+    z-index: 2;
+}
+.content input:focus {
+    outline: none;
+}
+
+.content ul {
+    position: absolute;
+    list-style: none;
+    /* background-color: #faf4ec; */
+    background-color: white;
+    padding: 0%;
+    display: flex;
+    gap: 10px;
+    width: 350px;
+    max-height: 400px;
+    top: 50px;
+    flex-direction: column;
+    z-index: 1;
+
+}
+
+.content ul li {
+    display: flex;
+    gap: 10px;
+}
+.content ul li p {
+    display: flex;
+    margin: 0%;
+    padding: 0%;
+}
+.todo {
+    /* position: relative; */
+    display: flex;
+    min-width: 300px;
+    justify-content: space-between;
+    padding: 10px 10px 10px 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    align-items: center;
+    background-color: white;
+}
+.todo p, h4{
+    margin: 0;
+}
